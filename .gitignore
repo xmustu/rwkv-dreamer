@@ -118,3 +118,6 @@ temp/
 # 可根据需要放开：!config_files/PWM.yaml （表示不忽略这个配置文件）
 
 *.pth
+
+pwm_atari/ckpt
+pwm_atari/wandb
