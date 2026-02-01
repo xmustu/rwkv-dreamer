@@ -154,8 +154,31 @@ def joint_train_world_model_agent(env_name,
             torch.save(agent.state_dict(), f"ckpt/{args.n}/agent_{total_steps}.pth")
 
 
-def build_world_model(conf, num_action, act, device):
-    return ParallelWorldModel(conf.JointTrainAgent.VideoLogStep,
+def build_world_model(conf, num_action, act, device,use_rwkv=True, verbose=False):
+    # return ParallelWorldModel(conf.JointTrainAgent.VideoLogStep,
+    #                           conf.BasicSettings.ObsShape,
+    #                           num_action,
+    #                           conf.Models.Stoch,
+    #                           conf.Models.Discrete, 
+    #                           conf.Models.Hidden,
+    #                           conf.Models.WorldModel.Stem,
+    #                           conf.Models.WorldModel.MinRes,
+    #                           conf.Models.NumBin,
+    #                           conf.Models.MaxBin,
+    #                           conf.Models.WorldModel.DynScale,
+    #                           conf.Models.WorldModel.RepScale,
+    #                           conf.Models.WorldModel.ValScale,
+    #                           conf.Models.WorldModel.KLFree,
+    #                           conf.Models.Gamma ** conf.BasicSettings.FrameSkip,
+    #                           conf.Models.Lambda,
+    #                           conf.Models.Tau,
+    #                           conf.Models.WorldModel.LR,
+    #                           conf.Models.WorldModel.Eps,
+    #                           conf.BasicSettings.UseAmp,
+    #                           act, device,
+    #                           ).to(device)
+    WM_Class = ParallelWorldModel
+    model = WM_Class(conf.JointTrainAgent.VideoLogStep,
                               conf.BasicSettings.ObsShape,
                               num_action,
                               conf.Models.Stoch,
@@ -176,7 +199,19 @@ def build_world_model(conf, num_action, act, device):
                               conf.Models.WorldModel.Eps,
                               conf.BasicSettings.UseAmp,
                               act, device,
+                            #   use_rwkv=use_rwkv,
+                              verbose=verbose
                               ).to(device)
+    if use_rwkv:
+        # 动态替换内部的 dynamic 模块
+        from modules.world_models import RWKV_PSSM
+        model.dynamic = RWKV_PSSM(
+            conf.Models.Stoch, conf.Models.Hidden, 
+            conf.Models.Discrete, num_action, 
+            model.encoder.embed, act, device, verbose
+        ).to(device)
+    return model
+    
 
 
 def build_agent(conf, num_action, act, device):
@@ -214,6 +249,9 @@ if __name__ == "__main__":
     parser.add_argument("-config_path", type=str, required=True)
     parser.add_argument("-env_name", type=str, required=True)
     parser.add_argument("-device", type=str, required=True)
+    parser.add_argument("--use_rwkv", action="store_true",help="使用 RWKV v7 替代 PSSM 算子")
+    # --- 新增：verbose 参数 ---
+    parser.add_argument("--verbose", action="store_true", default=False, help="开启调试模式，打印数值检查日志")
     args = parser.parse_args()
     conf = load_config(args.config_path)
     print(colorama.Fore.RED + str(args) + colorama.Style.RESET_ALL)
@@ -238,7 +276,7 @@ if __name__ == "__main__":
 
         # build world model and agent
         act = getattr(nn, conf.Models.Act)
-        world_model = build_world_model(conf, num_action, act, args.device)
+        world_model = build_world_model(conf, num_action, act, args.device, use_rwkv=args.use_rwkv, verbose=args.verbose)
         agent = build_agent(conf, num_action, act, args.device)
 
         # build replay buffer

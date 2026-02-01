@@ -10,6 +10,7 @@ import modules.functions_losses as func
 import modules.parallel_rnns as rnn
 import modules.networks as net
 
+from .rwkv7_rnns import RWKV7Cell
 
 params = lambda x: list(x.parameters())
 permute = lambda x: x.permute(0, 3, 1, 2)
@@ -42,6 +43,7 @@ class ParallelWorldModel(nn.Module):
                  use_amp,
                  act,
                  device,
+                 verbose=False
                 ):
         super().__init__()
         self.num_action = num_action
@@ -82,6 +84,7 @@ class ParallelWorldModel(nn.Module):
         self.optimizer = torch.optim.AdamW(model_params + vae_params, lr=lr, eps=eps)
         self.scaler = torch.cuda.amp.GradScaler(enabled=self.use_amp)
 
+        self.verbose = verbose # 保存 verbose 状态
     @torch.no_grad()
     def preprocess(self, obs):
         tensor_obs = torch.tensor(
@@ -278,7 +281,15 @@ class PSSM(nn.Module):
         return state["stoch"].flatten(-2, -1)
     
     def get_dist(self, state):
+        logits = state["logit"]
+        if self.verbose:
+            if not torch.isfinite(logits).all():
+                print(f"[RWKV Debug] Logits NaN/Inf! Max: {logits.max().item()}, Min: {logits.min().item()}")
+                
         probs = F.softmax(state["logit"], dim=-1)
+        if self.verbose:
+            if not torch.isfinite(probs).all() or (probs < 0).any() or (probs.sum(dim=-1) <= 0).any():
+                print(f"[RWKV Debug] Probs Error! Finite: {torch.isfinite(probs).all()}, Neg: {(probs < 0).any()}")
         probs = probs * (1 - self.unimix_ratio) + \
             self.unimix_ratio / self.discrete
         return OneHotCategorical(probs=probs)
@@ -368,3 +379,37 @@ class PSSM(nn.Module):
         rep_loss = torch.clip(rep_loss, min=free)
         dyn_loss = torch.clip(dyn_loss, min=free)
         return dyn_loss, rep_loss, real_kl, ent
+
+
+class RWKV_PSSM(PSSM):
+    def __init__(self, stoch, hidden, discrete, action_dim, embed, act, device, verbose=False):
+        # 1. 显式保存 verbose 参数
+        # 必须在调用 super().__init__ 之前赋值，因为父类构造函数内部会调用 self.init_cell()
+        self.verbose = verbose 
+        
+        # 2. 调用父类 PSSM 的初始化
+        super().__init__(stoch, hidden, discrete, action_dim, embed, act, device)
+    def init_cell(self):
+        layer_list = []
+        for i in range(self.num_rnns):
+            layer_list += [RWKV7Cell(self.hidden, self.hidden, self.act, verbose=self.verbose)]
+        return nn.ModuleList(layer_list)
+
+    def cell_layers(self, input, state, is_first, is_parallel):
+        # 仿照 PSSM 原版逻辑，处理并行模式下的转置
+        if is_parallel:
+            # swap 是 torch.transpose(x, 0, 1)
+            deter, is_first = torch.transpose(input, 0, 1), torch.transpose(is_first, 0, 1)
+        else:
+            deter, is_first = input, is_first
+        
+        stats = {}
+        for id, layer in enumerate(self.rnn_layer):
+            # 修正：调用时必须传入 id 参数
+            deter, cell_stats = layer(deter, is_first, state, is_parallel, id)
+            stats.update(cell_stats)
+
+        if is_parallel:
+            deter = torch.transpose(deter, 0, 1)
+            stats = {k: torch.transpose(v, 0, 1) for k, v in stats.items()}
+        return deter, stats
