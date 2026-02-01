@@ -281,17 +281,26 @@ class PSSM(nn.Module):
         return state["stoch"].flatten(-2, -1)
     
     def get_dist(self, state):
-        logits = state["logit"]
+        # logits = state["logit"]
+        # 1. 对 logit 进行安全截断
+        logits = torch.clamp(state["logit"], min=-20, max=20)
+        
         if self.verbose:
             if not torch.isfinite(logits).all():
                 print(f"[RWKV Debug] Logits NaN/Inf! Max: {logits.max().item()}, Min: {logits.min().item()}")
-                
+        # 2. 计算 softmax        
         probs = F.softmax(state["logit"], dim=-1)
         if self.verbose:
             if not torch.isfinite(probs).all() or (probs < 0).any() or (probs.sum(dim=-1) <= 0).any():
                 print(f"[RWKV Debug] Probs Error! Finite: {torch.isfinite(probs).all()}, Neg: {(probs < 0).any()}")
+        # 3. 现有的混合均匀分布逻辑 (维持 0.01 的最低概率)
         probs = probs * (1 - self.unimix_ratio) + \
             self.unimix_ratio / self.discrete
+            
+        # 4. 最终检查：如果仍有非有限数值（如 NaN），强制恢复为均匀分布
+        if not torch.all(torch.isfinite(probs)):
+            probs = torch.ones_like(probs) / self.discrete
+            
         return OneHotCategorical(probs=probs)
     
     def parallel_observe(self, embed, action, is_first):
