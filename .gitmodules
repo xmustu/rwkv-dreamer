@@ -1,0 +1,3 @@
+[submodule "pwm_atari/modules/read_rwkv_v7"]
+	path = pwm_atari/modules/read_rwkv_v7
+	url = https://github.com/xmustu/read_rwkv_v7.git
