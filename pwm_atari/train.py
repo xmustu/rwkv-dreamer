@@ -94,6 +94,12 @@ def joint_train_world_model_agent(env_name,
     logger.log(f"Rollout/{env_name}_reward", 0, 0)
     logger.log("Rollout/buffer_length", 1, 1)
 
+    # --- 效率记录初始化 ---
+    import time
+    efficiency_start_time = time.time()
+    efficiency_start_step = 0
+    log_efficiency_interval = 100 # 每 100 次迭代记录一次效率
+    
     # sample and train
     for total_steps in tqdm(range(max_steps // num_envs)):
         # sample part >>>
@@ -152,6 +158,31 @@ def joint_train_world_model_agent(env_name,
             print(colorama.Fore.GREEN + f"Saving model at total steps {total_steps}" + colorama.Style.RESET_ALL)
             torch.save(world_model.state_dict(), f"ckpt/{args.n}/world_model_{total_steps}.pth")
             torch.save(agent.state_dict(), f"ckpt/{args.n}/agent_{total_steps}.pth")
+            
+        # --- 记录效率指标 (SPS & VRAM) ---
+        if total_steps > 0 and total_steps % log_efficiency_interval == 0:
+            current_time = time.time()
+            elapsed_time = current_time - efficiency_start_time
+            
+            # 计算每秒处理的样本总步数 (考虑并行环境数)
+            steps_completed = (total_steps - efficiency_start_step) * num_envs
+            sps = steps_completed / elapsed_time
+            
+            # 获取当前显卡的显存峰值并转换为 MB
+            # 假设 world_model.device 或 args.device 可用
+            peak_vram = torch.cuda.max_memory_allocated(device=world_model.device) / (1024 ** 2)
+            
+            # 发送到 WandB
+            wandb.log({
+                "Efficiency/SPS": sps,
+                "Efficiency/Peak_VRAM_MB": peak_vram,
+                "Efficiency/Total_Steps": total_steps * num_envs
+            }, step=total_steps * num_envs)
+            
+            # 重置计时器和步数，并重置显存峰值统计以监控区间峰值
+            efficiency_start_time = current_time
+            efficiency_start_step = total_steps
+            torch.cuda.reset_peak_memory_stats(device=world_model.device)
 
 
 def build_world_model(conf, num_action, act, device,use_rwkv=True, verbose=False):
@@ -260,7 +291,8 @@ if __name__ == "__main__":
     seed_np_torch(seed=args.seed)
     wandb.init(
         project="Atari100K",
-        group=f"{args.env_name}",
+        # group=f"{args.env_name}",
+        group="RWKV-v7" if args.use_rwkv else "PSSM-Baseline",
         name=f"PWM-{args.env_name}-seed{args.seed}"
     )
     logger = Logger()
