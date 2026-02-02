@@ -195,7 +195,8 @@ class ParallelWorldModel(nn.Module):
 
         self.scaler.scale(model_loss + vae_loss).backward()
         self.scaler.unscale_(self.optimizer)
-        torch.nn.utils.clip_grad_norm_(self.parameters(), max_norm=100.0)
+        # 将原本的 clip_grad_norm_ 从 100.0 降低到 10.0
+        torch.nn.utils.clip_grad_norm_(self.parameters(), max_norm=10.0)
         self.scaler.step(self.optimizer)
         self.scaler.update()
         self.optimizer.zero_grad(set_to_none=True)

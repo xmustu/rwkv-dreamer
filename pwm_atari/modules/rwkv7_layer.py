@@ -66,7 +66,7 @@ class RWKV7Layer(nn.Module):
         B, T, C = x.size()
         H = self.n_head
         
-        # 1. Time Shift
+        # 1. Time Shift 
         xx = self.time_shift(x) - x
         x_in = x + xx * 0.5 
         
@@ -89,19 +89,33 @@ class RWKV7Layer(nn.Module):
         a = a.view(B, T, H, -1).float().contiguous()
         b = torch.ones_like(a).float().contiguous()
         
+        # 必须确保输入到 CUDA 的是连续的 bfloat16 张量
+        def to_kernel(t):
+            return t.view(B, T, H, -1).to(dtype=torch.bfloat16).contiguous()
+        
+        rk, kk, vk, wk, ak = map(to_kernel, [r, k, v, w, a])
+        bk = torch.ones_like(ak)
+        yk = torch.empty_like(vk)
+        
         y = torch.empty_like(v)
         
+        # 状态张量保持 float32 保证精度累积
         s = torch.zeros(B, H, T // CHUNK_LEN + 1, self.head_size, self.head_size, 
                         device=x.device, dtype=torch.float32)
         sa = torch.zeros(B, T, H, self.head_size, 
                          device=x.device, dtype=torch.float32)
         
         if wkv7_cuda is not None:
-            wkv7_cuda.forward(w, r, k, v, a, b, y, s, sa)
+            # wkv7_cuda.forward(w, r, k, v, a, b, y, s, sa)
+            wkv7_cuda.forward(wk, rk, kk, vk, ak, bk, yk, s, sa)
         else:
-            y = v * r # Dummy fallback
+            # y = v * r # Dummy fallback
+            yk = vk * rk
             
-        y = y.view(B, T, C)
+        # y = y.view(B, T, C)
+        # 3. 后处理：转回原始精度并执行“数值熔断”
+        y = yk.to(dtype=x.dtype).view(B, T, C)
+        
         # --- 条件 Log: 检查算子输出 ---
         if self.verbose:
             if not torch.isfinite(y).all():
