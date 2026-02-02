@@ -99,6 +99,9 @@ if __name__ == "__main__":
     parser.add_argument("-run_name", type=str, required=True)
     parser.add_argument("-device", type=str, required=True)
     parser.add_argument("-seed", type=int, required=True)
+    # --- 新增：RWKV 开关参数，保持与 train.py 一致 ---
+    parser.add_argument("--use_rwkv", action="store_true", help="是否使用 RWKV 架构进行评估")
+    
     args = parser.parse_args()
     conf = load_config(args.config_path)
     print(colorama.Fore.RED + str(args) + colorama.Style.RESET_ALL)
@@ -114,7 +117,10 @@ if __name__ == "__main__":
                                  args.seed)
     num_action = dummy_env.action_space.n
     act = getattr(nn, conf.Models.Act)
-    world_model = train.build_world_model(conf, num_action, act, args.device)
+    world_model = train.build_world_model(
+        conf, num_action, act, args.device,
+        use_rwkv=args.use_rwkv  # 确保这里使用了新参数
+    )
     agent = train.build_agent(conf, num_action, act, args.device)
     root_path = f"ckpt/{args.run_name}"
 
