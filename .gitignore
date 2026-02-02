@@ -1,0 +1,123 @@
+# =====================  Python 核心忽略  =====================
+# 字节码文件（编译后的Python文件）
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 缓存文件
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 虚拟环境（conda/pipenv/venv）
+venv/
+env/
+*.env
+.conda
+.venv
+env/
+ENV/
+
+# =====================  机器学习/深度学习  =====================
+# PyTorch相关
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.model
+checkpoints/
+weights/
+logs/
+wandb/  # wandb日志目录
+tensorboard/
+
+# 数据文件（大文件不要提交到Git）
+*.csv
+*.h5
+*.npy
+*.npz
+*.pickle
+data/
+datasets/
+dataset/
+
+# =====================  系统/编辑器 通用忽略  =====================
+# Linux系统
+.*.swp
+*.swp
+.DS_Store
+.idea/
+.vscode/
+*.sublime-*
+.fuse_hidden*
+.directory
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# macOS系统
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows系统
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# =====================  日志/临时文件  =====================
+*.log
+*.log.*
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+*.swp
+*.swo
+
+# =====================  你的项目专属  =====================
+# Atari环境相关
+*.rom
+*.bin
+# 配置文件（如果包含敏感信息）
+*.yaml
+*.yml
+# 可根据需要放开：!config_files/PWM.yaml （表示不忽略这个配置文件）
+
+*.pth
+
+pwm_atari/ckpt
+pwm_atari/wandb
