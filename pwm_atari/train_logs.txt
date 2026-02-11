@@ -1,0 +1,392 @@
+
+/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/glfw/__init__.py:917: GLFWError: (65550) b'X11: The DISPLAY environment variable is missing'
+  warnings.warn(message, GLFWError)
+Using /home/zhangzhenfu/.cache/torch_extensions/py310_cu124 as PyTorch extensions root...
+Detected CUDA files, patching ldflags
+Emitting ninja build file /home/zhangzhenfu/.cache/torch_extensions/py310_cu124/wkv7_cuda_v7/build.ninja...
+/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/torch/utils/cpp_extension.py:2059: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+If this is not desired, please set os.environ['TORCH_CUDA_ARCH_LIST'].
+  warnings.warn(
+Building extension module wkv7_cuda_v7...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Loading extension module wkv7_cuda_v7...
+[31mNamespace(n='Pong-ours-rwkv-100k-test', seed=0, config_path='config_files/PWM.yaml', env_name='ALE/Pong-v5', device='cuda:0', use_rwkv=True, verbose=True)[0m
+wandb: Currently logged in as: wsq20180606 (zzf20180606-university-of-electronic-science-and-technol). Use `wandb login --relogin` to force relogin
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: | Waiting for wandb.init()...wandb: wandb version 0.24.1 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.16.3
+wandb: Run data is saved locally in /home/zhangzhenfu/PaMoRL/pwm_atari/wandb/run-20260203_211158-hfu32yzz
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run PWM-ALE/Pong-v5-seed0--rwkv=True
+wandb: ⭐️ View project at https://wandb.ai/zzf20180606-university-of-electronic-science-and-technol/Atari100K
+wandb: 🚀 View run at https://wandb.ai/zzf20180606-university-of-electronic-science-and-technol/Atari100K/runs/hfu32yzz
+A.L.E: Arcade Learning Environment (version 0.8.1+53f58b7)
+[Powered by Stella]
+Current env: [33mALE/Pong-v5[0m
+  0%|          | 0/102000 [00:00<?, ?it/s][32mSaving model at total steps 0[0m
+  0%|          | 1/102000 [00:00<6:35:41,  4.30it/s]  0%|          | 53/102000 [00:00<08:30, 199.61it/s]  0%|          | 110/102000 [00:00<05:10, 328.27it/s]  0%|          | 153/102000 [00:00<04:51, 348.82it/s]  0%|          | 197/102000 [00:00<04:31, 375.64it/s]  0%|          | 239/102000 [00:00<04:37, 367.31it/s]  0%|          | 279/102000 [00:00<04:31, 374.52it/s]  0%|          | 327/102000 [00:00<04:11, 404.79it/s]  0%|          | 386/102000 [00:01<03:41, 458.28it/s]  0%|          | 445/102000 [00:01<03:24, 496.50it/s]  0%|          | 503/102000 [00:01<03:15, 520.06it/s]  1%|          | 563/102000 [00:01<03:06, 543.36it/s]  1%|          | 623/102000 [00:01<03:01, 559.10it/s]  1%|          | 684/102000 [00:01<02:57, 571.99it/s]  1%|          | 745/102000 [00:01<02:54, 581.89it/s]  1%|          | 805/102000 [00:01<02:52, 585.07it/s]  1%|          | 864/102000 [00:01<03:00, 560.28it/s]  1%|          | 921/102000 [00:02<04:25, 380.54it/s]  1%|          | 982/102000 [00:02<03:55, 429.58it/s]None
+y:  tensor([[[nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         ...,
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan]],
+
+        [[nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         ...,
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan]],
+
+        [[nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         ...,
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan]],
+
+        ...,
+
+        [[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]],
+
+        [[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]],
+
+        [[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0')
+[91m[DEBUG RWKV] Final y_out is NaN! T=16[0m
+None
+y:  tensor([[[nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         ...,
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan]],
+
+        [[nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         ...,
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan]],
+
+        [[nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         ...,
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan],
+         [nan, nan, nan,  ..., nan, nan, nan]],
+
+        ...,
+
+        [[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]],
+
+        [[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]],
+
+        [[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]]], device='cuda:0')
+[91m[DEBUG RWKV] Final y_out is NaN! T=16[0m
+[RWKV Debug] Logits NaN/Inf! Max: nan, Min: nan
+[RWKV Debug] Probs Error! Finite: False, Neg: False
+[RWKV Debug] Logits NaN/Inf! Max: nan, Min: nan
+[RWKV Debug] Probs Error! Finite: False, Neg: False
+[RWKV Debug] Logits NaN/Inf! Max: nan, Min: nan
+[RWKV Debug] Probs Error! Finite: False, Neg: False
+[RWKV Debug] Logits NaN/Inf! Max: nan, Min: nan
+[RWKV Debug] Probs Error! Finite: False, Neg: False
+[RWKV Debug] Logits NaN/Inf! Max: nan, Min: nan
+[RWKV Debug] Probs Error! Finite: False, Neg: False
+None
+y:  tensor([[[   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         ...,
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan]],
+
+        [[   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         ...,
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan]],
+
+        [[   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         ...,
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan],
+         [   nan,    nan,    nan,  ...,    nan,    nan,    nan]],
+
+        ...,
+
+        [[0.0025, 0.1140, 0.0021,  ..., 0.0065, 0.0385, 0.0073],
+         [0.0044, 0.0765, 0.0149,  ..., 0.0944, 0.0263, 0.0203],
+         [0.0096, 0.0470, 0.0126,  ..., 0.0063, 0.0232, 0.0209],
+         ...,
+         [0.0058, 0.1799, 0.0075,  ..., 0.0410, 0.0187, 0.0063],
+         [0.0055, 0.0236, 0.0182,  ..., 0.0094, 0.0476, 0.0059],
+         [0.0047, 0.0523, 0.0308,  ..., 0.0408, 0.0382, 0.0037]],
+
+        [[0.0112, 0.0023, 0.0338,  ..., 0.0062, 0.0115, 0.0131],
+         [0.0025, 0.2257, 0.0077,  ..., 0.0077, 0.0756, 0.0042],
+         [0.0373, 0.0027, 0.0131,  ..., 0.0074, 0.0016, 0.0300],
+         ...,
+         [0.0082, 0.0215, 0.0098,  ..., 0.0060, 0.0185, 0.0178],
+         [0.0059, 0.0871, 0.0139,  ..., 0.0073, 0.0268, 0.0064],
+         [0.0016, 0.0362, 0.0124,  ..., 0.0060, 0.0340, 0.0126]],
+
+        [[0.0032, 0.0171, 0.0134,  ..., 0.0052, 0.0081, 0.0028],
+         [0.0077, 0.0311, 0.0309,  ..., 0.0038, 0.0162, 0.0025],
+         [0.0028, 0.0126, 0.0231,  ..., 0.0014, 0.0178, 0.0141],
+         ...,
+         [0.0128, 0.0282, 0.1241,  ..., 0.0075, 0.0076, 0.0032],
+         [0.0343, 0.0317, 0.0246,  ..., 0.0156, 0.0448, 0.0080],
+         [0.0120, 0.0606, 0.0385,  ..., 0.0173, 0.0127, 0.0045]]],
+       device='cuda:0')
+[91m[DEBUG RWKV] Final y_out is NaN! T=16[0m
+None
+y:  tensor([[[-2.7768e+38,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         ...,
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan]],
+
+        [[        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         ...,
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan]],
+
+        [[        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         ...,
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan]],
+
+        ...,
+
+        [[        nan,         nan,         nan,  ...,  0.0000e+00,
+           0.0000e+00,  0.0000e+00],
+         [        nan,         nan,         nan,  ...,        -inf,
+                 -inf,        -inf],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         ...,
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan]],
+
+        [[ 0.0000e+00,  0.0000e+00,  0.0000e+00,  ...,  0.0000e+00,
+           0.0000e+00,  0.0000e+00],
+         [        inf,        -inf,         nan,  ...,        -inf,
+                  nan,        -inf],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         ...,
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan]],
+
+        [[ 0.0000e+00,  0.0000e+00,  0.0000e+00,  ...,  0.0000e+00,
+           0.0000e+00,  0.0000e+00],
+         [       -inf,        -inf,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         ...,
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan],
+         [        nan,         nan,         nan,  ...,         nan,
+                  nan,         nan]]], device='cuda:0')
+[91m[DEBUG RWKV] Final y_out is NaN! T=16[0m
+[RWKV Debug] Logits NaN/Inf! Max: nan, Min: nan
+[RWKV Debug] Probs Error! Finite: False, Neg: False
+None
+/pytorch/aten/src/ATen/native/cuda/TensorCompare.cu:110: _assert_async_cuda_kernel: block: [0,0,0], thread: [0,0,0] Assertion `probability tensor contains either `inf`, `nan` or element < 0` failed.
+  1%|          | 1025/102000 [00:03<05:31, 304.60it/s]
+Traceback (most recent call last):
+  File "/home/zhangzhenfu/PaMoRL/pwm_atari/train.py", line 324, in <module>
+    joint_train_world_model_agent(args.env_name,
+  File "/home/zhangzhenfu/PaMoRL/pwm_atari/train.py", line 154, in joint_train_world_model_agent
+    train_agent_step(samples, *models, imagine_horizon, *logs)
+  File "/home/zhangzhenfu/PaMoRL/pwm_atari/train.py", line 50, in train_agent_step
+    imagine_outputs = world_model.imagine_data(
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/zhangzhenfu/PaMoRL/pwm_atari/modules/world_models.py", line 162, in imagine_data
+    img_state = self.dynamic.img_step(img_state, self.action_buffer[:, t])
+  File "/home/zhangzhenfu/PaMoRL/pwm_atari/modules/world_models.py", line 337, in img_step
+    deter, para_stats = self.cell_layers(
+  File "/home/zhangzhenfu/PaMoRL/pwm_atari/modules/world_models.py", line 424, in cell_layers
+    deter, cell_stats = layer(deter, is_first, state, is_parallel, id)
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/zhangzhenfu/PaMoRL/pwm_atari/modules/rwkv7_rnns.py", line 41, in forward
+    output, _ = self.rwkv(inp.unsqueeze(1))
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/zhangzhenfu/PaMoRL/pwm_atari/modules/rwkv7_layer.py", line 81, in forward
+    if self.verbose and not torch.isfinite(x).all():
+RuntimeError: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+wandb: - 0.011 MB of 0.011 MB uploadedwandb: \ 0.011 MB of 0.011 MB uploadedwandb: | 0.011 MB of 0.011 MB uploadedwandb: / 0.011 MB of 0.031 MB uploadedwandb: - 0.011 MB of 0.031 MB uploadedwandb: \ 0.019 MB of 0.031 MB uploadedwandb: | 0.031 MB of 0.031 MB uploadedwandb: 
+wandb: Run history:
+wandb:    Efficiency/Peak_VRAM_MB █▁▁▁▁▁▁▁▁▁
+wandb:             Efficiency/SPS ▁▄▄█████▂▇
+wandb:     Efficiency/Total_Steps ▁▂▃▃▄▅▆▆▇█
+wandb: Rollout/ALE/Pong-v5_reward ▁
+wandb:      Rollout/buffer_length ▁
+wandb: 
+wandb: Run summary:
+wandb:    Efficiency/Peak_VRAM_MB 1315.08496
+wandb:             Efficiency/SPS 574.15556
+wandb:     Efficiency/Total_Steps 1000
+wandb: Rollout/ALE/Pong-v5_reward 0
+wandb:      Rollout/buffer_length 1
+wandb: 
+wandb: 🚀 View run PWM-ALE/Pong-v5-seed0--rwkv=True at: https://wandb.ai/zzf20180606-university-of-electronic-science-and-technol/Atari100K/runs/hfu32yzz
+wandb: ️⚡ View job at https://wandb.ai/zzf20180606-university-of-electronic-science-and-technol/Atari100K/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjg1ODAzOTUzNw==/version_details/v4
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260203_211158-hfu32yzz/logs
+Exception in thread Exception in thread IntMsgThrNetStatThr:
+:
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+        self.run()self.run()
+
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/threading.py", line 953, in run
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/threading.py", line 953, in run
+        self._target(*self._args, **self._kwargs)self._target(*self._args, **self._kwargs)
+
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 300, in check_internal_messages
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 268, in check_network_status
+        self._loop_check_status(self._loop_check_status(
+
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 224, in _loop_check_status
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 224, in _loop_check_status
+        local_handle = request()local_handle = request()
+
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/interface/interface.py", line 792, in deliver_network_status
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/interface/interface.py", line 800, in deliver_internal_messages
+        return self._deliver_network_status(status)return self._deliver_internal_messages(internal_message)
+
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/interface/interface_shared.py", line 500, in _deliver_network_status
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/interface/interface_shared.py", line 506, in _deliver_internal_messages
+        return self._deliver_record(record)return self._deliver_record(record)
+
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/interface/interface_shared.py", line 449, in _deliver_record
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/interface/interface_shared.py", line 449, in _deliver_record
+        handle = mailbox._deliver_record(record, interface=self)handle = mailbox._deliver_record(record, interface=self)
+
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/lib/mailbox.py", line 455, in _deliver_record
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/lib/mailbox.py", line 455, in _deliver_record
+    interface._publish(record)
+      File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/interface/interface_sock.py", line 51, in _publish
+interface._publish(record)
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/interface/interface_sock.py", line 51, in _publish
+    self._sock_client.send_record_publish(record)
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 221, in send_record_publish
+    self._sock_client.send_record_publish(record)
+      File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 221, in send_record_publish
+self.send_server_request(server_req)
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 155, in send_server_request
+    self.send_server_request(server_req)    
+self._send_message(msg)  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 155, in send_server_request
+
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 152, in _send_message
+        self._send_message(msg)self._sendall_with_error_handle(header + data)
+
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 152, in _send_message
+  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 130, in _sendall_with_error_handle
+        sent = self._sock.send(data)self._sendall_with_error_handle(header + data)
+
+BrokenPipeError  File "/home/zhangzhenfu/miniconda3/envs/storm/lib/python3.10/site-packages/wandb/sdk/lib/sock_client.py", line 130, in _sendall_with_error_handle
+: [Errno 32] Broken pipe
+    sent = self._sock.send(data)
+BrokenPipeError: [Errno 32] Broken pipe

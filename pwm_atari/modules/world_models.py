@@ -70,7 +70,7 @@ class ParallelWorldModel(nn.Module):
         self.decoder = net.Decoder(
             self.stoch_dim, self.encoder.out_ch, obs_shape[-1], stem_ch, min_res, act)
         
-        self.dynamic = PSSM(stoch, hidden, discrete, num_action, self.encoder.embed, act, device, verbose)
+        self.dynamic = PSSM(stoch, hidden, discrete, num_action, self.encoder.embed, act, device)
         self.done_head = net.Head(hidden, 1, hidden, act)
         self.reward_head = net.Head(hidden, num_bin, hidden, act)
 
@@ -216,7 +216,7 @@ class ParallelWorldModel(nn.Module):
 
 
 class PSSM(nn.Module):
-    def __init__(self, stoch, hidden, discrete, action_dim, embed, act, device, verbose, unimix_ratio=0.01):
+    def __init__(self, stoch, hidden, discrete, action_dim, embed, act, device, unimix_ratio=0.01):
         super().__init__()
         self.stoch = stoch
         self.hidden = hidden
@@ -244,8 +244,6 @@ class PSSM(nn.Module):
             cell_ws.update(cell_stats)
         self.cell_ws = cell_ws
         self.init_deter = torch.zeros(1, hidden, requires_grad=False).to(device)
-        
-        self.verbose = verbose  # 保存 verbose 状态
     
     def init_cell(self):
         layer_list = []
@@ -400,7 +398,7 @@ class RWKV_PSSM(PSSM):
         self.verbose = verbose 
         
         # 2. 调用父类 PSSM 的初始化
-        super().__init__(stoch, hidden, discrete, action_dim, embed, act, device, verbose)
+        super().__init__(stoch, hidden, discrete, action_dim, embed, act, device)
     def init_cell(self):
         layer_list = []
         for i in range(self.num_rnns):
